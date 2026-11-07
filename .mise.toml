@@ -41,6 +41,7 @@ run = [
   "mise run --cd code/spellslinger-llm-queue test",
   "mise run --cd code/spellslinger-login test",
   "mise run --cd code/spellslinger-mcp test",
+  "mise run --cd code/spellslinger-react-repo-seed test",
 ]
 
 [tasks."code:lint"]
@@ -59,6 +60,7 @@ run = [
   "mise run --cd code/spellslinger-llm-queue lint",
   "mise run --cd code/spellslinger-login lint",
   "mise run --cd code/spellslinger-mcp lint",
+  "mise run --cd code/spellslinger-react-repo-seed lint",
 ]
 
 [tasks."code:fmt"]
@@ -77,5 +79,6 @@ run = [
   "mise run --cd code/spellslinger-llm-queue fmt",
   "mise run --cd code/spellslinger-login fmt",
   "mise run --cd code/spellslinger-mcp fmt",
+  "mise run --cd code/spellslinger-react-repo-seed fmt",
 ]
 # workbench:code-tasks:end

@@ -50,3 +50,7 @@
 	path = code/spellslinger-mcp
 	url = https://github.com/szymonrychu/spellslinger-mcp
 	branch = main
+[submodule "spellslinger-react-repo-seed"]
+	path = code/spellslinger-react-repo-seed
+	url = https://github.com/szymonrychu/spellslinger-react-repo-seed
+	branch = main
