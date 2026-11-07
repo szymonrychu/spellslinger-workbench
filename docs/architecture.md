@@ -11,6 +11,7 @@ workbench/
     spellslinger-deckbuilder/  (python)
     spellslinger-docs/  (generic)
     spellslinger-golang-repo-seed/  (go)
+    spellslinger-helmfile/  (generic)
 ```
 
 - `code/spellslinger-cards` (go): card database API and Scryfall ingestion CronJob
@@ -19,3 +20,4 @@ workbench/
 - `code/spellslinger-deckbuilder` (python): deck building service
 - `code/spellslinger-docs` (generic): spellslinger documentation
 - `code/spellslinger-golang-repo-seed` (go): Go repo seed service and template
+- `code/spellslinger-helmfile` (generic): deployment config for the spellslinger releases
