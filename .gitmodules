@@ -26,3 +26,7 @@
 	path = code/spellslinger-helmfile
 	url = https://github.com/szymonrychu/spellslinger-helmfile
 	branch = main
+[submodule "spellslinger-identity"]
+	path = code/spellslinger-identity
+	url = https://github.com/szymonrychu/spellslinger-identity
+	branch = main
