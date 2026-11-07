@@ -37,6 +37,7 @@ spellslinger is an MTG deck-optimization system: Go microservices (cards, identi
 | spellslinger-golang-repo-seed | go | Go repo seed service and template | `mise run --cd code/spellslinger-golang-repo-seed test` |
 | spellslinger-helmfile | generic | deployment config for the spellslinger releases | `mise run --cd code/spellslinger-helmfile test` |
 | spellslinger-identity | go | users and identity service | `mise run --cd code/spellslinger-identity test` |
+| spellslinger-knowledge | go | knowledge base service and its worker CronJobs | `mise run --cd code/spellslinger-knowledge test` |
 
 ## Component hard rules
 

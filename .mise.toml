@@ -36,6 +36,7 @@ run = [
   "mise run --cd code/spellslinger-golang-repo-seed test",
   "mise run --cd code/spellslinger-helmfile test",
   "mise run --cd code/spellslinger-identity test",
+  "mise run --cd code/spellslinger-knowledge test",
 ]
 
 [tasks."code:lint"]
@@ -49,6 +50,7 @@ run = [
   "mise run --cd code/spellslinger-golang-repo-seed lint",
   "mise run --cd code/spellslinger-helmfile lint",
   "mise run --cd code/spellslinger-identity lint",
+  "mise run --cd code/spellslinger-knowledge lint",
 ]
 
 [tasks."code:fmt"]
@@ -62,5 +64,6 @@ run = [
   "mise run --cd code/spellslinger-golang-repo-seed fmt",
   "mise run --cd code/spellslinger-helmfile fmt",
   "mise run --cd code/spellslinger-identity fmt",
+  "mise run --cd code/spellslinger-knowledge fmt",
 ]
 # workbench:code-tasks:end
