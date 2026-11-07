@@ -37,6 +37,7 @@ run = [
   "mise run --cd code/spellslinger-helmfile test",
   "mise run --cd code/spellslinger-identity test",
   "mise run --cd code/spellslinger-knowledge test",
+  "mise run --cd code/spellslinger-lightrag test",
 ]
 
 [tasks."code:lint"]
@@ -51,6 +52,7 @@ run = [
   "mise run --cd code/spellslinger-helmfile lint",
   "mise run --cd code/spellslinger-identity lint",
   "mise run --cd code/spellslinger-knowledge lint",
+  "mise run --cd code/spellslinger-lightrag lint",
 ]
 
 [tasks."code:fmt"]
@@ -65,5 +67,6 @@ run = [
   "mise run --cd code/spellslinger-helmfile fmt",
   "mise run --cd code/spellslinger-identity fmt",
   "mise run --cd code/spellslinger-knowledge fmt",
+  "mise run --cd code/spellslinger-lightrag fmt",
 ]
 # workbench:code-tasks:end

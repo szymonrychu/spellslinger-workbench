@@ -34,3 +34,7 @@
 	path = code/spellslinger-knowledge
 	url = https://github.com/szymonrychu/spellslinger-knowledge
 	branch = main
+[submodule "spellslinger-lightrag"]
+	path = code/spellslinger-lightrag
+	url = https://github.com/szymonrychu/spellslinger-lightrag
+	branch = main

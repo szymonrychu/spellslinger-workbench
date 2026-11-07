@@ -14,6 +14,7 @@ workbench/
     spellslinger-helmfile/  (generic)
     spellslinger-identity/  (go)
     spellslinger-knowledge/  (go)
+    spellslinger-lightrag/  (generic)
 ```
 
 - `code/spellslinger-cards` (go): card database API and Scryfall ingestion CronJob
@@ -25,3 +26,4 @@ workbench/
 - `code/spellslinger-helmfile` (generic): deployment config for the spellslinger releases
 - `code/spellslinger-identity` (go): users and identity service
 - `code/spellslinger-knowledge` (go): knowledge base service and its worker CronJobs
+- `code/spellslinger-lightrag` (generic): LightRAG deployment and charts
