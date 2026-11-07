@@ -2,4 +2,10 @@
 
 ## Components
 
-This is the uninitialised template: init fills the component map.
+```
+workbench/
+  code/
+    spellslinger-cards/  (go)
+```
+
+- `code/spellslinger-cards` (go): card database API and Scryfall ingestion CronJob

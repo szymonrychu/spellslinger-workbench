@@ -1,0 +1,4 @@
+[submodule "spellslinger-cards"]
+	path = code/spellslinger-cards
+	url = https://github.com/szymonrychu/spellslinger-cards
+	branch = main

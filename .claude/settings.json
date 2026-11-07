@@ -1,6 +1,6 @@
 {
   "extraKnownMarketplaces": {
-    "workbench-template": {
+    "spellslinger-workbench": {
       "source": {
         "source": "directory",
         "path": "./"
@@ -8,10 +8,10 @@
     }
   },
   "enabledPlugins": {
-    "workbench@workbench-template": true,
-    "workbench-infra@workbench-template": false,
-    "workbench-observability@workbench-template": false,
-    "workbench-secrets@workbench-template": false
+    "workbench@spellslinger-workbench": true,
+    "workbench-infra@spellslinger-workbench": false,
+    "workbench-observability@spellslinger-workbench": false,
+    "workbench-secrets@spellslinger-workbench": false
   },
   "permissions": {
     "allow": []

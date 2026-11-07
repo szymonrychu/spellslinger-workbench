@@ -1,13 +1,3 @@
-<!-- workbench:uninitialised:begin -->
-> **This workbench is not initialised.**
-> If the user asks to start a new project or to adopt existing repos, run the `init` skill
-> (`workbench:init` in Claude Code, `init` in other harnesses) and do nothing else first.
-> Any other development request on an uninitialised tree: ask the user whether to run init
-> first.
-> If the user is developing the template itself, follow "Template maintenance" below and
-> never run init.
-<!-- workbench:uninitialised:end -->
-
 # Workbench
 
 ## What this repository is
@@ -33,20 +23,28 @@ branch, land on that submodule's default branch, then commit the moved pointer h
 <!-- workbench:project:begin -->
 ## What this project is building
 
-_Filled by init from the user's answer: one paragraph on the product and who it is for._
+spellslinger is an MTG deck-optimization system: Go microservices (cards, identity, knowledge, statistics, synergy-api, reveries, codex, llm-queue), the sscli CLI and MCP server spellslinger-mcp-http, LightRAG, neo4j and CNPG Postgres, deployed in k8s namespace spellslinger-development (llm-queue in ns ai) by manual helm upgrade with no CI today; being taken over under the tatara agents system. Facts: docs/discovery.md. Read-only third-party reference: code/ironsmith (Chiplis/ironsmith, pinned, never updated, never edited).
 
 ## Components (code/)
 
 | Submodule | Lang | Role | Build |
 |-----------|------|------|-------|
+| spellslinger-cards | go | card database API and Scryfall ingestion CronJob | `mise run --cd code/spellslinger-cards test` |
 
 ## Component hard rules
 
-_Filled by init: the rules every component must obey, one per line._
+- The spellslinger MCP is in live use by the mtg and marek-mtg presets and by hermes-agent: NO disruption allowed.
+- Cluster changes only through reviewed PRs and planned, announced applies; discovery is read-only first.
+- Go services; deploy only semver-tagged images (X.Y.Z), never a sha tag.
+- code/ironsmith is a read-only third-party reference pinned to one commit: no branch tracking, no edits, no submodule update --remote for it.
 
 ## Highest-risk surface
 
-_Filled by init: the surface where a mistake costs the most, and what must never break there._
+Live MCP and the spellslinger-development namespace (stateful Postgres and neo4j without backups): any helm upgrade, restart or node move can drop agent tool calls or lose data.
+
+## Forge
+
+Origins are on GitHub: changes land through pull requests (PRs), via `gh`.
 <!-- workbench:project:end -->
 
 ## Ground rules
@@ -227,18 +225,3 @@ The user's standing rules for every agent, every harness and every task.
 9. **One log dir.** Every log lands in the gitignored `.logs` in the workbench
    root (`workbench.py logs` prints it).
 <!-- workbench:rules:end -->
-
-## Template maintenance
-
-Applies only when developing the template itself, in an uninitialised workbench.
-Never run init here.
-
-- `mise run test` and `mise run lint` must both be green before any change lands.
-- `mise run e2e` runs the slow full green-tree proofs (`pytest -m slow`, ~48 minutes); the
-  default `mise run test` deselects them and CI runs them as the `e2e` job.
-- The plugin loads from the main checkout, not from a worktree: edits to `plugins/` made in
-  a task or integration tree take effect in Claude Code only after the epic merges to main
-  and `/reload-plugins` runs.
-- The `workbench:rules` block is produced from `plugins/workbench/rules/`; change the rule
-  files, then rebuild with `mise run harness-setup`, never edit the block by hand.
-- Record non-obvious decisions in `MEMORY.md`.

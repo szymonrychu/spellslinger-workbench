@@ -25,4 +25,21 @@ description = "Format python"
 run = "ruff format plugins scripts"
 
 # workbench:code-tasks:begin
+[tasks."code:test"]
+description = "Run test in every component"
+run = [
+  "mise run --cd code/spellslinger-cards test",
+]
+
+[tasks."code:lint"]
+description = "Run lint in every component"
+run = [
+  "mise run --cd code/spellslinger-cards lint",
+]
+
+[tasks."code:fmt"]
+description = "Run fmt in every component"
+run = [
+  "mise run --cd code/spellslinger-cards fmt",
+]
 # workbench:code-tasks:end

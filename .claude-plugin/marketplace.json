@@ -1,6 +1,6 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
-  "name": "workbench-template",
+  "name": "spellslinger-workbench",
   "description": "Workbench template plugins: a core plugin plus optional packs.",
   "owner": {
     "name": "workbench contributors"

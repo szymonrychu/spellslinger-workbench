@@ -1,0 +1,16 @@
+{
+  "allow": [
+    {
+      "path": "**",
+      "pattern": "023b52d862779e627518790b99a1aa44ea35f8ca1e9647265bcc98351332e378"
+    },
+    {
+      "path": "**",
+      "pattern": "5aebe8db67638020eeaab4fc46cee85832e521e32552846ae2130001fbd846d1"
+    },
+    {
+      "path": "**",
+      "pattern": "c34928c3c4608378eedddac362a5dd0d5e525719d753bf317ec1d6a5f0af2c4b"
+    }
+  ]
+}
