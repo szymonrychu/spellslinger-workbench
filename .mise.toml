@@ -45,6 +45,7 @@ run = [
   "mise run --cd code/spellslinger-reveries test",
   "mise run --cd code/spellslinger-statistics test",
   "mise run --cd code/spellslinger-synergy-api test",
+  "mise run --cd code/magic-cards-model test",
 ]
 
 [tasks."code:lint"]
@@ -67,6 +68,7 @@ run = [
   "mise run --cd code/spellslinger-reveries lint",
   "mise run --cd code/spellslinger-statistics lint",
   "mise run --cd code/spellslinger-synergy-api lint",
+  "mise run --cd code/magic-cards-model lint",
 ]
 
 [tasks."code:fmt"]
@@ -89,5 +91,6 @@ run = [
   "mise run --cd code/spellslinger-reveries fmt",
   "mise run --cd code/spellslinger-statistics fmt",
   "mise run --cd code/spellslinger-synergy-api fmt",
+  "mise run --cd code/magic-cards-model fmt",
 ]
 # workbench:code-tasks:end

@@ -22,6 +22,7 @@ workbench/
     spellslinger-reveries/  (go)
     spellslinger-statistics/  (go)
     spellslinger-synergy-api/  (go)
+    magic-cards-model/  (python)
 ```
 
 - `code/spellslinger-cards` (go): card database API and Scryfall ingestion CronJob
@@ -41,3 +42,4 @@ workbench/
 - `code/spellslinger-reveries` (go): curated MTG knowledge service
 - `code/spellslinger-statistics` (go): tournament statistics service and scraper CronJobs
 - `code/spellslinger-synergy-api` (go): synergy and deck evaluation API plus worker CronJob
+- `code/magic-cards-model` (python): MTG rules/cards model engine, separate product (ns mtg-engine); phase 2 maturity comparison candidate

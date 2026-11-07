@@ -10,6 +10,10 @@
     },
     {
       "path": "**",
+      "pattern": "8b83d90b21cf82b42882f4cbb630d93bbae26e2f7330240cd567bf1837233a07"
+    },
+    {
+      "path": "**",
       "pattern": "c34928c3c4608378eedddac362a5dd0d5e525719d753bf317ec1d6a5f0af2c4b"
     }
   ]
