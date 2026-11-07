@@ -17,6 +17,7 @@ workbench/
     spellslinger-lightrag/  (generic)
     spellslinger-llm-queue/  (go)
     spellslinger-login/  (generic)
+    spellslinger-mcp/  (go)
 ```
 
 - `code/spellslinger-cards` (go): card database API and Scryfall ingestion CronJob
@@ -31,3 +32,4 @@ workbench/
 - `code/spellslinger-lightrag` (generic): LightRAG deployment and charts
 - `code/spellslinger-llm-queue` (go): LLM request queue service (runs in ns ai)
 - `code/spellslinger-login` (generic): Keycloak login theme image
+- `code/spellslinger-mcp` (go): spellslinger MCP server
