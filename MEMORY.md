@@ -20,3 +20,10 @@ Dated entries, newest last. Supersede an entry rather than deleting it. One line
 2026-11-07: components now: spellslinger-cards, spellslinger-cli, spellslinger-codex, spellslinger-deckbuilder, spellslinger-docs, spellslinger-golang-repo-seed, spellslinger-helmfile, spellslinger-identity, spellslinger-knowledge, spellslinger-lightrag, spellslinger-llm-queue, spellslinger-login, spellslinger-mcp, spellslinger-react-repo-seed, spellslinger-reveries, spellslinger-statistics; via component add --url.
 2026-11-07: components now: spellslinger-cards, spellslinger-cli, spellslinger-codex, spellslinger-deckbuilder, spellslinger-docs, spellslinger-golang-repo-seed, spellslinger-helmfile, spellslinger-identity, spellslinger-knowledge, spellslinger-lightrag, spellslinger-llm-queue, spellslinger-login, spellslinger-mcp, spellslinger-react-repo-seed, spellslinger-reveries, spellslinger-statistics, spellslinger-synergy-api; via component add --url.
 2026-11-07: components now: spellslinger-cards, spellslinger-cli, spellslinger-codex, spellslinger-deckbuilder, spellslinger-docs, spellslinger-golang-repo-seed, spellslinger-helmfile, spellslinger-identity, spellslinger-knowledge, spellslinger-lightrag, spellslinger-llm-queue, spellslinger-login, spellslinger-mcp, spellslinger-react-repo-seed, spellslinger-reveries, spellslinger-statistics, spellslinger-synergy-api, magic-cards-model; via component add --url.
+
+## 2026-11-07 ironsmith is a gitlink with update = none
+
+code/ironsmith (Chiplis/ironsmith) is about 2.6 GB (a depth-1 clone filled the 20G workspace volume). It is
+registered as a gitlink pinned to 0596688958475ac5cae99d6264af0a4afce944cb with `update = none` and no
+`branch`, so init and refresh never touch it. Read-only third-party reference: never edit, never update the pin
+without the user.

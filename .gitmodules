@@ -70,3 +70,8 @@
 	path = code/magic-cards-model
 	url = https://github.com/szymonrychu/magic-cards-model
 	branch = main
+[submodule "ironsmith"]
+	path = code/ironsmith
+	url = https://github.com/Chiplis/ironsmith
+	update = none
+	shallow = true

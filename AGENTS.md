@@ -47,6 +47,7 @@ spellslinger is an MTG deck-optimization system: Go microservices (cards, identi
 | spellslinger-statistics | go | tournament statistics service and scraper CronJobs | `mise run --cd code/spellslinger-statistics test` |
 | spellslinger-synergy-api | go | synergy and deck evaluation API plus worker CronJob | `mise run --cd code/spellslinger-synergy-api test` |
 | magic-cards-model | python | MTG rules/cards model engine, separate product (ns mtg-engine); phase 2 maturity comparison candidate | `mise run --cd code/magic-cards-model test` |
+| ironsmith | rust | READ-ONLY third-party reference (Chiplis/ironsmith), pinned to commit 0596688, no branch tracking, never edited; not cloned by `git submodule update --init` (update = none, about 2.6 GB); phase 2 maturity comparison candidate | none |
 
 ## Component hard rules
 
@@ -242,3 +243,10 @@ The user's standing rules for every agent, every harness and every task.
 9. **One log dir.** Every log lands in the gitignored `.logs` in the workbench
    root (`workbench.py logs` prints it).
 <!-- workbench:rules:end -->
+
+## State of spellslinger (2026-11-07)
+
+Live in namespace spellslinger-development (22 Helm releases, applied by hand, no CI, no GitOps; llm-queue in
+ns ai). Sources are the `code/` submodules. Known problems: synergy-api-worker OOMKilled (fix in open PRs, see
+`docs/plans/t-57/plan.md`), cards-ingestion stale since 2026-08-24, no database backups, single replica MCP.
+Details: `docs/discovery.md`. Remaining T-57 scope: `docs/plans/t-57/plan.md`.
