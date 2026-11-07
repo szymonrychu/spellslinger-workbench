@@ -20,6 +20,7 @@ workbench/
     spellslinger-mcp/  (go)
     spellslinger-react-repo-seed/  (typescript)
     spellslinger-reveries/  (go)
+    spellslinger-statistics/  (go)
 ```
 
 - `code/spellslinger-cards` (go): card database API and Scryfall ingestion CronJob
@@ -37,3 +38,4 @@ workbench/
 - `code/spellslinger-mcp` (go): spellslinger MCP server
 - `code/spellslinger-react-repo-seed` (typescript): React repo seed service and template
 - `code/spellslinger-reveries` (go): curated MTG knowledge service
+- `code/spellslinger-statistics` (go): tournament statistics service and scraper CronJobs

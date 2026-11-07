@@ -58,3 +58,7 @@
 	path = code/spellslinger-reveries
 	url = https://github.com/szymonrychu/spellslinger-reveries
 	branch = main
+[submodule "spellslinger-statistics"]
+	path = code/spellslinger-statistics
+	url = https://github.com/szymonrychu/spellslinger-statistics
+	branch = main
