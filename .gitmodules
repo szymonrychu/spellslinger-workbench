@@ -10,3 +10,7 @@
 	path = code/spellslinger-codex
 	url = https://github.com/szymonrychu/spellslinger-codex
 	branch = main
+[submodule "spellslinger-deckbuilder"]
+	path = code/spellslinger-deckbuilder
+	url = https://github.com/szymonrychu/spellslinger-deckbuilder
+	branch = main
