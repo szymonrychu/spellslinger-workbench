@@ -18,3 +18,7 @@
 	path = code/spellslinger-docs
 	url = https://github.com/szymonrychu/spellslinger-docs
 	branch = main
+[submodule "spellslinger-golang-repo-seed"]
+	path = code/spellslinger-golang-repo-seed
+	url = https://github.com/szymonrychu/spellslinger-golang-repo-seed
+	branch = main

@@ -7,3 +7,4 @@ Dated entries, newest last. Supersede an entry rather than deleting it. One line
 2026-11-07: components now: spellslinger-cards, spellslinger-cli, spellslinger-codex; via component add --url.
 2026-11-07: components now: spellslinger-cards, spellslinger-cli, spellslinger-codex, spellslinger-deckbuilder; via component add --url.
 2026-11-07: components now: spellslinger-cards, spellslinger-cli, spellslinger-codex, spellslinger-deckbuilder, spellslinger-docs; via component add --url.
+2026-11-07: components now: spellslinger-cards, spellslinger-cli, spellslinger-codex, spellslinger-deckbuilder, spellslinger-docs, spellslinger-golang-repo-seed; via component add --url.
