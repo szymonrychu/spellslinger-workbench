@@ -43,6 +43,7 @@ spellslinger is an MTG deck-optimization system: Go microservices (cards, identi
 | spellslinger-login | generic | Keycloak login theme image | `mise run --cd code/spellslinger-login test` |
 | spellslinger-mcp | go | spellslinger MCP server | `mise run --cd code/spellslinger-mcp test` |
 | spellslinger-react-repo-seed | typescript | React repo seed service and template | `mise run --cd code/spellslinger-react-repo-seed test` |
+| spellslinger-reveries | go | curated MTG knowledge service | `mise run --cd code/spellslinger-reveries test` |
 
 ## Component hard rules
 
