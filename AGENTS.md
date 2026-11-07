@@ -33,6 +33,7 @@ spellslinger is an MTG deck-optimization system: Go microservices (cards, identi
 | spellslinger-cli | go | sscli CLI and the MCP server (spellslinger-mcp-http runs sscli mcp) | `mise run --cd code/spellslinger-cli test` |
 | spellslinger-codex | typescript | codex service (purpose to be verified) | `mise run --cd code/spellslinger-codex test` |
 | spellslinger-deckbuilder | python | deck building service | `mise run --cd code/spellslinger-deckbuilder test` |
+| spellslinger-docs | generic | spellslinger documentation | `mise run --cd code/spellslinger-docs test` |
 
 ## Component hard rules
 

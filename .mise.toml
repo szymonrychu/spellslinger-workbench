@@ -32,6 +32,7 @@ run = [
   "mise run --cd code/spellslinger-cli test",
   "mise run --cd code/spellslinger-codex test",
   "mise run --cd code/spellslinger-deckbuilder test",
+  "mise run --cd code/spellslinger-docs test",
 ]
 
 [tasks."code:lint"]
@@ -41,6 +42,7 @@ run = [
   "mise run --cd code/spellslinger-cli lint",
   "mise run --cd code/spellslinger-codex lint",
   "mise run --cd code/spellslinger-deckbuilder lint",
+  "mise run --cd code/spellslinger-docs lint",
 ]
 
 [tasks."code:fmt"]
@@ -50,5 +52,6 @@ run = [
   "mise run --cd code/spellslinger-cli fmt",
   "mise run --cd code/spellslinger-codex fmt",
   "mise run --cd code/spellslinger-deckbuilder fmt",
+  "mise run --cd code/spellslinger-docs fmt",
 ]
 # workbench:code-tasks:end
