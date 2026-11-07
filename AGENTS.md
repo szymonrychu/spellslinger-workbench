@@ -40,6 +40,7 @@ spellslinger is an MTG deck-optimization system: Go microservices (cards, identi
 | spellslinger-knowledge | go | knowledge base service and its worker CronJobs | `mise run --cd code/spellslinger-knowledge test` |
 | spellslinger-lightrag | generic | LightRAG deployment and charts | `mise run --cd code/spellslinger-lightrag test` |
 | spellslinger-llm-queue | go | LLM request queue service (runs in ns ai) | `mise run --cd code/spellslinger-llm-queue test` |
+| spellslinger-login | generic | Keycloak login theme image | `mise run --cd code/spellslinger-login test` |
 
 ## Component hard rules
 

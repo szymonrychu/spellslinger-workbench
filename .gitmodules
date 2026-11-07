@@ -42,3 +42,7 @@
 	path = code/spellslinger-llm-queue
 	url = https://github.com/szymonrychu/spellslinger-llm-queue
 	branch = main
+[submodule "spellslinger-login"]
+	path = code/spellslinger-login
+	url = https://github.com/szymonrychu/spellslinger-login
+	branch = main
