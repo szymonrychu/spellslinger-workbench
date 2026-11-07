@@ -30,6 +30,7 @@ description = "Run test in every component"
 run = [
   "mise run --cd code/spellslinger-cards test",
   "mise run --cd code/spellslinger-cli test",
+  "mise run --cd code/spellslinger-codex test",
 ]
 
 [tasks."code:lint"]
@@ -37,6 +38,7 @@ description = "Run lint in every component"
 run = [
   "mise run --cd code/spellslinger-cards lint",
   "mise run --cd code/spellslinger-cli lint",
+  "mise run --cd code/spellslinger-codex lint",
 ]
 
 [tasks."code:fmt"]
@@ -44,5 +46,6 @@ description = "Run fmt in every component"
 run = [
   "mise run --cd code/spellslinger-cards fmt",
   "mise run --cd code/spellslinger-cli fmt",
+  "mise run --cd code/spellslinger-codex fmt",
 ]
 # workbench:code-tasks:end

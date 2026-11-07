@@ -6,3 +6,7 @@
 	path = code/spellslinger-cli
 	url = https://github.com/szymonrychu/spellslinger-cli
 	branch = main
+[submodule "spellslinger-codex"]
+	path = code/spellslinger-codex
+	url = https://github.com/szymonrychu/spellslinger-codex
+	branch = main
