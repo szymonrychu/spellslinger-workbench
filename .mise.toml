@@ -44,6 +44,7 @@ run = [
   "mise run --cd code/spellslinger-react-repo-seed test",
   "mise run --cd code/spellslinger-reveries test",
   "mise run --cd code/spellslinger-statistics test",
+  "mise run --cd code/spellslinger-synergy-api test",
 ]
 
 [tasks."code:lint"]
@@ -65,6 +66,7 @@ run = [
   "mise run --cd code/spellslinger-react-repo-seed lint",
   "mise run --cd code/spellslinger-reveries lint",
   "mise run --cd code/spellslinger-statistics lint",
+  "mise run --cd code/spellslinger-synergy-api lint",
 ]
 
 [tasks."code:fmt"]
@@ -86,5 +88,6 @@ run = [
   "mise run --cd code/spellslinger-react-repo-seed fmt",
   "mise run --cd code/spellslinger-reveries fmt",
   "mise run --cd code/spellslinger-statistics fmt",
+  "mise run --cd code/spellslinger-synergy-api fmt",
 ]
 # workbench:code-tasks:end

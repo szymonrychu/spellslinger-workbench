@@ -62,3 +62,7 @@
 	path = code/spellslinger-statistics
 	url = https://github.com/szymonrychu/spellslinger-statistics
 	branch = main
+[submodule "spellslinger-synergy-api"]
+	path = code/spellslinger-synergy-api
+	url = https://github.com/szymonrychu/spellslinger-synergy-api
+	branch = main
