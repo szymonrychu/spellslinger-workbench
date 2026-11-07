@@ -38,3 +38,7 @@
 	path = code/spellslinger-lightrag
 	url = https://github.com/szymonrychu/spellslinger-lightrag
 	branch = main
+[submodule "spellslinger-llm-queue"]
+	path = code/spellslinger-llm-queue
+	url = https://github.com/szymonrychu/spellslinger-llm-queue
+	branch = main

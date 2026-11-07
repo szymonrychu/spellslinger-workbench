@@ -15,6 +15,7 @@ workbench/
     spellslinger-identity/  (go)
     spellslinger-knowledge/  (go)
     spellslinger-lightrag/  (generic)
+    spellslinger-llm-queue/  (go)
 ```
 
 - `code/spellslinger-cards` (go): card database API and Scryfall ingestion CronJob
@@ -27,3 +28,4 @@ workbench/
 - `code/spellslinger-identity` (go): users and identity service
 - `code/spellslinger-knowledge` (go): knowledge base service and its worker CronJobs
 - `code/spellslinger-lightrag` (generic): LightRAG deployment and charts
+- `code/spellslinger-llm-queue` (go): LLM request queue service (runs in ns ai)
