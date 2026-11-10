@@ -1,0 +1,198 @@
+# T-57 spike: replay magic-cards-model's Modern metagame deck scenarios on MCM and on
+# ironsmith (Chiplis/ironsmith at the pinned commit) and compare.
+#
+# Third-party code (ironsmith and everything its build pulls in) runs only here, never on a
+# developer machine or in the agents' pods. The workflow uses no repository secrets: the
+# token is read-only, MCM comes from the spike/t57-mcm-snapshot branch of this repository
+# and ironsmith is a public repository.
+name: spike-ironsmith
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+    paths:
+      - spike/**
+      - .github/workflows/spike-ironsmith.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: spike-ironsmith-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  IRONSMITH_REPO: Chiplis/ironsmith
+  IRONSMITH_SHA: 0596688958475ac5cae99d6264af0a4afce944cb
+  MCM_SNAPSHOT_REF: spike/t57-mcm-snapshot
+
+jobs:
+  translate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ env.MCM_SNAPSHOT_REF }}
+          path: mcm
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.13"
+      - name: Translate MCM deck scenarios
+        run: python spike/translate.py mcm translated
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: translated
+          path: translated/
+
+  mcm:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ env.MCM_SNAPSHOT_REF }}
+          path: mcm
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
+        with:
+          python-version: "3.13"
+      - name: Run the deck scenarios on MCM
+        working-directory: mcm
+        run: |
+          uv sync --all-extras --frozen
+          set +e
+          uv run pytest tests/scenarios/*_deck.py tests/scenarios/test_deck_45c_aggro.py \
+            -n 4 -p no:cacheprovider --junitxml="$GITHUB_WORKSPACE/mcm-junit.xml" -q
+          echo "pytest exit code $?"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: mcm-results
+          path: mcm-junit.xml
+
+  ironsmith:
+    needs: translate
+    runs-on: ubuntu-24.04
+    timeout-minutes: 240
+    steps:
+      - name: Free runner disk space
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL
+          df -h /
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: ${{ env.IRONSMITH_REPO }}
+          ref: ${{ env.IRONSMITH_SHA }}
+          path: ironsmith
+          persist-credentials: false
+          # web/ui/public alone is 1.2 GB of UI assets the engine build does not read.
+          sparse-checkout: |
+            architecture
+            crates
+            fixtures
+            npm
+            scripts
+            tools
+            vendor
+            web/ui/scripts
+            web/ui/src
+            web/wasm_demo
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: translated
+          path: translated
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22.14.0
+          package-manager-cache: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.13"
+      - name: Rust toolchain
+        run: |
+          rustup target add wasm32-unknown-unknown
+          rustc --version
+          cargo --version
+      - uses: Swatinem/rust-cache@d1527c8f67ef9af357290475d4af4b0fab8f12e0 # v2.9.3
+        with:
+          workspaces: ironsmith -> target
+          shared-key: spike-t57-${{ env.IRONSMITH_SHA }}
+          cache-on-failure: true
+      - name: Card subset for the translated scenarios
+        run: |
+          python spike/cards_subset.py translated/card-names.txt ironsmith/cards.json
+          echo "names with no Scryfall match:"
+          cat ironsmith/cards.json.missing.txt
+      - name: Register and compile the card subset
+        working-directory: ironsmith
+        run: |
+          mkdir -p reports target
+          cargo run --release -p ironsmith-registry-sync --bin sync_registry_db -- \
+            --cards cards.json --db-path reports/engine-status.sqlite3 --text-changes-only \
+            --inserted-names-out target/inserted.txt --changed-names-out target/changed.txt
+          sort -u target/inserted.txt target/changed.txt > target/compile-names.txt
+          wc -l target/compile-names.txt
+          cargo run --release -p ironsmith-tools --bin sync_card_status_db -- \
+            --db-path reports/engine-status.sqlite3 --names-file target/compile-names.txt
+      - name: Build the WASM engine
+        working-directory: ironsmith
+        run: ./rebuild-wasm.sh --skip-scryfall-sync
+      - name: Run the translated scenarios on ironsmith
+        run: |
+          mkdir -p out ironsmith/scripts/spike-t57
+          cp spike/ironsmith/spike-lib.mjs translated/ironsmith/*.test.mjs ironsmith/scripts/spike-t57/
+          cd ironsmith/scripts/spike-t57
+          set +e
+          SPIKE_DETAILS="$GITHUB_WORKSPACE/out/details.jsonl" node --test \
+            --test-isolation=none --test-concurrency=1 \
+            --test-reporter=junit --test-reporter-destination="$GITHUB_WORKSPACE/out/ironsmith-junit.xml" \
+            --test-reporter=spec --test-reporter-destination=stdout \
+            ./*.test.mjs
+          echo "node exit code $?"
+      - name: Engine build facts
+        if: always()
+        run: |
+          cp ironsmith/cards.json.missing.txt out/ 2>/dev/null || true
+          ls -la ironsmith/pkg 2>/dev/null | tee out/pkg-listing.txt || true
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: ironsmith-results
+          path: out/
+
+  report:
+    needs: [translate, mcm, ironsmith]
+    if: always()
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          path: artifacts
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.13"
+      - name: Compare
+        run: |
+          python spike/compare.py artifacts/translated/scenarios.json \
+            artifacts/mcm-results/mcm-junit.xml \
+            artifacts/ironsmith-results/ironsmith-junit.xml \
+            artifacts/ironsmith-results/details.jsonl results
+          cp artifacts/translated/scenarios.json results/
+          cat results/results.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: spike-results
+          path: results/
