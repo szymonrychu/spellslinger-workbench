@@ -15,7 +15,7 @@ absent (`kubectl top` fails); Prometheus covers it. Loki 14d/7d aggregate querie
 
 ## 1. Topology (namespace `spellslinger-development`, age 185d)
 
-All in-house images: `harbor.szymonrichert.pl/containers/<name>:<semver>`. Services are Go (slog JSON logs).
+All in-house images: `registry.example.com/containers/<name>:<semver>`. Services are Go (slog JSON logs).
 
 | Release (Helm) | Image:tag | Rev | Last deploy | Role / notes |
 |---|---|---|---|---|
@@ -31,19 +31,19 @@ All in-house images: `harbor.szymonrichert.pl/containers/<name>:<semver>`. Servi
 | spellslinger-lightrag, -reveries-lightrag | ghcr.io/hkuds/lightrag:v1.4.16 | 2 / 1 | 2026-05 | LightRAG, 1Gi limit |
 | spellslinger-neo4j, -reveries-neo4j (sts) | neo4j:5.26.0-community | 2 / 36 | 2026-07/08 | graph stores, 5Gi PVC each |
 | 7x `*-database` (CNPG `cluster-0.6.0`) | postgresql 15/16 | | 2026-05..08 | cards, identity, knowledge, lightrag, reveries, statistics, synergy-api; 1 instance each |
-| oauth2proxy-external | oauth2-proxy v7.15.2 | 18 | 2026-05-24 | SSO in front of spellslinger.szymonrichert.pl |
+| oauth2-proxy-external | oauth2-proxy v7.15.2 | 18 | 2026-05-24 | SSO in front of spellslinger.example.com |
 | flaresolverr (not Helm, kubectl apply) | flaresolverr v3.3.21 | | | Cloudflare bypass for scrapers, 2 replicas |
 
 Related elsewhere:
 - ns `ai`: `spellslinger-llm-queue` 0.2.0 (+ worker, CNPG `spellslinger-llm-queue-database` release in **failed** state since
   2026-10-19, rev 13). This one IS in `szymonrychu/helmfile` (`helmfiles/ai`).
-- Keycloak realm `spellslinger` (auth.szymonrichert.pl): clients, groups, IdP, scopes, service accounts, test users in
+- Keycloak realm `spellslinger` (auth.example.com): clients, groups, IdP, scopes, service accounts, test users in
   `szymonrychu/terraform` `keycloak/spellslinger_*.tf`. Login theme image from `szymonrychu/spellslinger-login`.
 - ns `mtg-engine`: `mtg-stack` (magic-cards-model-api, sha tag) - separate product (GitHub `magic-cards-model*`), not spellslinger.
 - ns `mtg`: empty.
 
-Ingresses: `spellslinger.szymonrichert.pl` (cards, identity, knowledge, lightrag, reveries, statistics, synergy-api,
-oauth2proxy) and `mcp.szymonrichert.pl` (`spellslinger-mcp-http-lan`). NetworkPolicy only on mcp-http.
+Ingresses: `spellslinger.example.com` (cards, identity, knowledge, lightrag, reveries, statistics, synergy-api,
+oauth2-proxy) and `mcp.example.com` (`spellslinger-mcp-http-lan`). NetworkPolicy only on mcp-http.
 Placement: 15 of 23 long-running pods on `nas-d0w363i`; some Deployments nodeSelector-pinned to it.
 
 ## 2. How it is deployed
@@ -80,9 +80,9 @@ glab is authenticated to gitlab.com (user szymonrychu); no groups visible; owned
   manabase/meta_snapshot); orchestrator presets `mtg` and `marek-mtg` (per caller; presets API returned 403 to this
   SA, so not independently verified). Nothing in any-mcp-tatara-plugins or this workbench references spellslinger.
 - MCP request volume: **not measurable** - sscli logs only token refreshes, exposes no metrics; in-cluster traffic
-  bypasses ingress. LAN ingress `mcp.szymonrichert.pl`: 2510x 403, 821x 308, 0x 2xx in 14d (only rejected/redirected
+  bypasses ingress. LAN ingress `mcp.example.com`: 2510x 403, 821x 308, 0x 2xx in 14d (only rejected/redirected
   external hits). mcp-http pod RX ~9 B/s average.
-- Web/API ingress 14d: synergy-api 394x 200, statistics 35, cards 5, oauth2proxy ~1046 302s. Light, single-user.
+- Web/API ingress 14d: synergy-api 394x 200, statistics 35, cards 5, oauth2-proxy ~1046 302s. Light, single-user.
 - Memory peaks 14d (MiB): flaresolverr 3071, workers 1024 (= limit), postgres 994, neo4j 591, lightrag 363,
   statistics 329.
 - Storage: lightrag DB PVC 73% of 5Gi (highest); others under 25%; synergy DB 19% of 50Gi.
@@ -99,7 +99,7 @@ glab is authenticated to gitlab.com (user szymonrychu); no groups visible; owned
 5. knowledge-worker-enrich logs "rows permanently retired at the retry cap" every 15 min (104 deck_archetypes, 30 wiki_sections).
 6. **No backups**: all 7 CNPG clusters have no `backup` spec and no ScheduledBackup (CNPG backups disabled
    cluster-wide per helmfile ROADMAP), single instance each; neo4j PVCs unbacked too. Data loss on a rook-ceph incident.
-7. Restarts 14d: mcp-http 18, synergy-api 12, reveries-lightrag 9, oauth2proxy 7, lightrag 6. mcp-http had 14 distinct
+7. Restarts 14d: mcp-http 18, synergy-api 12, reveries-lightrag 9, oauth2-proxy 7, lightrag 6. mcp-http had 14 distinct
    pods in 14d (frequent rescheduling); a restart drops in-flight agent tool calls. Single replica, no PDB.
 8. Startup ordering: services crash once (Error) at reschedule until DBs come up.
 9. No resource limits on most Deployments (only workers, lightrag, neo4j, flaresolverr).
@@ -119,7 +119,7 @@ Known, cloneable now:
 
 Needed but source location unknown (blocker - user must supply): spellslinger-cards, -identity, -knowledge,
 -statistics, -synergy-api, -reveries, -codex, -golang-repo-seed, -react-repo-seed, sscli (mcp-http),
--llm-queue, lightrag charts (spellslinger-lightrag, -reveries-lightrag), neo4j values, oauth2proxy-external values,
+-llm-queue, lightrag charts (spellslinger-lightrag, -reveries-lightrag), neo4j values, oauth2-proxy-external values,
 flaresolverr manifest.
 
 Reference-only candidates (decide): GitHub `szymonrychu/mtg-decks` (consumer), April predecessors
