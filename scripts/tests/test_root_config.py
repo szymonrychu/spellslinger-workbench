@@ -3,6 +3,7 @@
 import json
 import re
 import subprocess
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -126,7 +127,7 @@ def test_template_marker_registered_and_noop_in_template(request):
 def test_template_only_ids_all_exist():
     conf = _conftest()
     out = subprocess.run(
-        ["python", "-m", "pytest", "--collect-only", "-q", "-p", "no:cacheprovider"],
+        [sys.executable, "-m", "pytest", "--collect-only", "-q", "-p", "no:cacheprovider"],
         cwd=ROOT, capture_output=True, text=True, check=True,
     ).stdout.splitlines()  # fmt: skip
     collected = {x for x in out if "::" in x}
