@@ -36,7 +36,7 @@ comparison is ironsmith vs MCM; spellslinger is the consumer that would call whi
 | Test LOC / tests | 31,628 `#[test]` fns, 257 `#[ignore]`; 1,744 ported XMage card tests; 125k-line CR audit test | 527,600 LOC, 23,186 test fns in 1,883 files, 75 xfail mentions |
 | CI on main | none runs tests (only an npm publish workflow on tags) | GitHub Actions lint+test; last green 2026-10-04, every run since cancelled at the 20 min timeout |
 | Commits / first / last | 4,690 / 2026-02-06 / 2026-11-06 (upstream active today) | 2,930 / 2026-08-30 / 2026-10-14 (dormant 4 weeks) |
-| Humans | 1 core (Chiplis, 3,250 commits) + 1 UI contributor (151) + 955 bot and about 300 cloud-agent commits; 885 PRs, 564 merged | 1 (Szymon Richert, agent-driven) |
+| Humans | 1 core (Chiplis, 3,250 commits) + 1 UI contributor (151) + 955 bot and about 300 cloud-agent commits; 885 PRs, 564 merged | 1 (the owner, agent-driven) |
 | Licence | `BUSL-1.1 OR AGPL-3.0-or-later` (BSL: non-commercial production only; MIT after 4 years per version) | none (private, all rights reserved) |
 
 ## 2. Card coverage
