@@ -246,7 +246,6 @@ The user's standing rules for every agent, every harness and every task.
 
 ## State of spellslinger (2026-11-07)
 
-Live in namespace spellslinger-development (22 Helm releases, applied by hand, no CI, no GitOps; llm-queue in
-ns ai). Sources are the `code/` submodules. Known problems: synergy-api-worker OOMKilled (fix in open PRs, see
-`docs/plans/t-57/plan.md`), cards-ingestion stale since 2026-08-24, no database backups, single replica MCP.
+Live in ns spellslinger-development (22 Helm releases, applied by hand; llm-queue in ns ai). Known problems:
+synergy-api-worker OOMKilled, cards-ingestion stale since 2026-08-24, no database backups, single replica MCP.
 Details: `docs/discovery.md`. Remaining T-57 scope: `docs/plans/t-57/plan.md`.
